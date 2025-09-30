@@ -1,15 +1,24 @@
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
-import type { FormValues } from "../types";
+import type { FormData } from "../types";
+import { multiStepFormSchema } from "../types";
 
-function FormReactHookForm({
+function Form({
 	handleSubmitData,
 }: {
-	handleSubmitData: (data: FormValues) => void;
+	handleSubmitData: (data: FormData) => void;
 }) {
-	const { register, handleSubmit, reset } = useForm<FormValues>();
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm<FormData>({
+		resolver: zodResolver(multiStepFormSchema),
+	});
 
-	const onSubmit: SubmitHandler<FormValues> = (data) => {
+	const onSubmit: SubmitHandler<FormData> = (data) => {
 		handleSubmitData(data);
 		reset();
 	};
@@ -27,6 +36,9 @@ function FormReactHookForm({
 					className="border border-gray-300 bg-neutral-100 text-black rounded"
 				/>
 			</label>
+			{errors.firstName && (
+				<p className="text-red-400">{errors.firstName.message}</p>
+			)}
 			<label className="flex flex-col text-gray-100">
 				Second name
 				<input
@@ -35,6 +47,10 @@ function FormReactHookForm({
 					className="border border-gray-300 bg-neutral-100 text-black rounded"
 				/>
 			</label>
+			{errors.lastName && (
+				<p className="text-red-400">{errors.lastName.message}</p>
+			)}
+
 			<button
 				type="submit"
 				className="px-6 py-2.5 bg-blue-500 text-white rounded cursor-pointer"
@@ -45,4 +61,4 @@ function FormReactHookForm({
 	);
 }
 
-export default FormReactHookForm;
+export default Form;
