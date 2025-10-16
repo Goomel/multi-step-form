@@ -2,7 +2,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
 import type { FormData } from "../types";
-import { multiStepFormSchema } from "../types";
+import { MultiStepFormSchema } from "../types";
+import FormField from "./FormField";
 
 function Form({
 	handleSubmitData,
@@ -15,7 +16,7 @@ function Form({
 		reset,
 		formState: { errors },
 	} = useForm<FormData>({
-		resolver: zodResolver(multiStepFormSchema),
+		resolver: zodResolver(MultiStepFormSchema),
 	});
 
 	const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -28,29 +29,20 @@ function Form({
 			className="grid grid-cols-1 gap-2 lg:gap-3 w-lg mx-auto bg-neutral-600 p-4 rounded"
 			onSubmit={handleSubmit(onSubmit)}
 		>
-			<label className="flex flex-col text-gray-100">
-				First name
-				<input
-					type="text"
-					{...register("firstName")}
-					className="border border-gray-300 bg-neutral-100 text-black rounded"
-				/>
-			</label>
-			{errors.firstName && (
-				<p className="text-red-400">{errors.firstName.message}</p>
-			)}
-			<label className="flex flex-col text-gray-100">
-				Second name
-				<input
-					type="text"
-					{...register("lastName")}
-					className="border border-gray-300 bg-neutral-100 text-black rounded"
-				/>
-			</label>
-			{errors.lastName && (
-				<p className="text-red-400">{errors.lastName.message}</p>
-			)}
-
+			<FormField
+				type="text"
+				label="First name"
+				name="firstName"
+				register={register}
+				error={errors.firstName}
+			/>
+			<FormField
+				type="text"
+				label="Last name"
+				name="lastName"
+				register={register}
+				error={errors.lastName}
+			/>
 			<button
 				type="submit"
 				className="px-6 py-2.5 bg-blue-500 text-white rounded cursor-pointer"
