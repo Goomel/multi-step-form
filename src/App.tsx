@@ -1,4 +1,4 @@
-import Form from "./components/Form.tsx";
+import Form from "./components/forms/Form.tsx";
 import { useState } from "react";
 import type { FormData } from "./types";
 

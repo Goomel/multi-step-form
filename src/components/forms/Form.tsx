@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { SubmitHandler } from "react-hook-form";
-import type { FormData } from "../types";
-import { MultiStepFormSchema } from "../types";
+import type { FormData } from "@/types";
+import { BookTicketFormSchema } from "@/types";
 import FormField from "./FormField";
 
 function Form({
@@ -16,7 +16,7 @@ function Form({
 		reset,
 		formState: { errors },
 	} = useForm<FormData>({
-		resolver: zodResolver(MultiStepFormSchema),
+		resolver: zodResolver(BookTicketFormSchema),
 	});
 
 	const onSubmit: SubmitHandler<FormData> = (data) => {
