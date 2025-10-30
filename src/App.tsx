@@ -1,24 +1,24 @@
-import Form from "./components/forms/Form.tsx";
-import { useState } from "react";
-import type { FormData } from "./types";
+import { Navigate, Routes, Route } from "react-router";
+// import { useState } from "react";
+// import type { FormData } from "./types";
+import PersonalDataStep from "@/components/forms/PersonalDataStep.tsx";
+import AddressStep from "@/components/forms/AddressStep.tsx";
+import ReservationDetailsStep from "@/components/forms/ReservationDetailsStep.tsx";
+import StepLayout from "@/components/forms/StepLayout.tsx";
 
 function App() {
-	const [submittedData, setSubmittedData] = useState<FormData | null>(null);
-
 	return (
-		<div className="bg-neutral-800">
-			<div className="flex flex-col gap-2 lg:gap-3 justify-center items-center min-h-screen">
-				<Form handleSubmitData={setSubmittedData} />
+			<StepLayout>
+				<Routes>
+						<Route index element={<Navigate to="/personal-data" replace/>} />
+						<Route path="/personal-data" element={<PersonalDataStep />} />
+						<Route path="/address" element={<AddressStep />} />
+						<Route path="/reservation-details" element={<ReservationDetailsStep />} />
 
-				{submittedData?.firstName && submittedData?.lastName && (
-					<div>
-						<p>Submitted Data</p>
-						<p>First name: {submittedData.firstName}</p>
-						<p>Last name: {submittedData.lastName}</p>
-					</div>
-				)}
-			</div>
-		</div>
+						{/* Default */}
+						<Route path="*" element={<Navigate to="/personal-data" replace/>} />
+				</Routes>
+			</StepLayout>
 	);
 }
 
