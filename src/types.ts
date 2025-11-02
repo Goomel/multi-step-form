@@ -32,3 +32,12 @@ export type FormFieldProps = {
 	label?: string;
 	error?: FieldError;
 };
+
+export type FormContextType = {
+  data: FormData;
+  setFormData: (data: FormData) => void,
+  step: number;
+  setCurrentStep: (step: number) => void;
+  nextStep: () => void;
+  prevStep: () => void;
+};
