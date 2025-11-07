@@ -61,7 +61,8 @@ const Form = () => {
     const contextValue = {
         data: formData,
         setFormData,
-        step: currentStep,
+        steps: STEPS,
+        currentStep,
         setCurrentStep,
         nextStep,
         prevStep
