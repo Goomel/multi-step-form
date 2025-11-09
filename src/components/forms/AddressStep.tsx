@@ -31,7 +31,7 @@ const AddressStep = () => {
         <div>
             <h2>Address Step</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormField type="text" name="address" register={register} error={errors.address} />
+                <FormField type="text" name="street" register={register} error={errors.street} />
                 <FormField type="text" name="city" register={register} error={errors.city} />
                 <FormField type="text" name="zipCode" register={register} error={errors.zipCode} />
                 <StepNavigation />

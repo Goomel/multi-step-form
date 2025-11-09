@@ -12,7 +12,7 @@ export const BookTicketFormSchema = z.object({
         .max(20, 'Last name must be at most 20 characters long'),
     email: z.email('Invalid email address'),
     phone: z.string().min(9, 'Phone number must be at least 9 characters long'),
-    address: z.string().min(1, 'Address is required'),
+    street: z.string().min(1, 'Street is required'),
     city: z.string().min(1, 'City is required'),
     zipCode: z.string().min(1, 'Zip code is required'),
     ticketType: z.string().min(1, 'Ticket type is required'),
@@ -27,18 +27,18 @@ type NameFields =
     | 'lastName'
     | 'email'
     | 'phone'
-    | 'address'
+    | 'street'
     | 'city'
     | 'zipCode'
     | 'ticketType'
     | 'ticketQuantity'
     | 'additionalInfo';
 
-export type FormFieldProps<T extends Record<string, any>> = {
+export type FormFieldProps = {
     type: string;
     placeholder?: string;
     name: NameFields;
-    register: UseFormRegister<T>;
+    register: UseFormRegister<any>;
     label?: string;
     error?: FieldError;
 };

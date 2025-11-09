@@ -75,7 +75,11 @@ const Form = () => {
                     <Routes>
                         <Route index element={<Navigate to={STEPS[0].path} replace />} />
                         {STEPS.map((step) => (
-                            <Route key={step.path} path={step.path} element={step.component} />
+                            <Route
+                                key={step.path}
+                                path={currentStep === 0 ? STEPS[0].path : step.path}
+                                element={step.component}
+                            />
                         ))}
 
                         {/* Default */}
