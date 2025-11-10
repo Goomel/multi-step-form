@@ -28,11 +28,10 @@ const STEPS = [
 const Form = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState<FormData>({
-        firstName: '',
-        lastName: '',
+        name: '',
         email: '',
         phone: '',
-        address: '',
+        street: '',
         city: '',
         zipCode: '',
         ticketType: '',
@@ -69,7 +68,7 @@ const Form = () => {
     };
 
     return (
-        <div>
+        <div className="container">
             <FormContext.Provider value={contextValue}>
                 <StepLayout>
                     <Routes>

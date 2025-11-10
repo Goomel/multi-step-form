@@ -6,9 +6,9 @@ const StepNavigation = () => {
     const { steps, currentStep, prevStep } = useFormContext();
 
     return (
-        <div className="flex gap-4 items-center">
+        <div className={`flex gap-4 items-center ${currentStep === 0 ? 'justify-end' : 'justify-between'}`}>
             {currentStep > 0 && <ButtonPrev onClick={prevStep} />}
-            <ButtonNext steps={steps} currentStep={currentStep} />
+            <ButtonNext stepsAmount={steps.length} currentStep={currentStep} />
         </div>
     );
 };

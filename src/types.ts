@@ -2,15 +2,11 @@ import { z } from 'zod';
 import type { FieldError, UseFormRegister } from 'react-hook-form';
 
 export const BookTicketFormSchema = z.object({
-    firstName: z
+    name: z
         .string()
-        .min(3, 'First name must be at least 3 characters long')
-        .max(20, 'First name must be at most 20 characters long'),
-    lastName: z
-        .string()
-        .min(3, 'Last name must be at least 3 characters long')
-        .max(20, 'Last name must be at most 20 characters long'),
-    email: z.email('Invalid email address'),
+        .min(3, 'Name must be at least 3 characters long')
+        .max(20, 'Name must be at most 20 characters long'),
+    email: z.email('Please enter a valid email'),
     phone: z.string().min(9, 'Phone number must be at least 9 characters long'),
     street: z.string().min(1, 'Street is required'),
     city: z.string().min(1, 'City is required'),
@@ -23,8 +19,7 @@ export const BookTicketFormSchema = z.object({
 export type FormData = z.infer<typeof BookTicketFormSchema>;
 
 type NameFields =
-    | 'firstName'
-    | 'lastName'
+    | 'name'
     | 'email'
     | 'phone'
     | 'street'

@@ -1,10 +1,10 @@
-const ButtonNext = ({ steps, currentStep }: { steps: number; currentStep: number }) => {
+const ButtonNext = ({ stepsAmount, currentStep }: { stepsAmount: number; currentStep: number }) => {
     return (
         <button
             type="submit"
-            className="bg-orange-500 text-gray-50 h-10 px-3 lg:px-4 rounded-md lg:rounded-lg font-medium cursor-pointer"
+            className="bg-orange-500 text-gray-50 h-10 px-3 lg:px-4 rounded-md lg:rounded-lg font-semibold cursor-pointer"
         >
-            {currentStep === steps ? 'Submit' : 'Next step'}
+            {currentStep === stepsAmount ? 'Submit' : 'Next step'}
         </button>
     );
 };

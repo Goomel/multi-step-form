@@ -7,12 +7,11 @@ import FormField from './FormField';
 import StepNavigation from './StepNavigation';
 
 const PersonalDataSchema = BookTicketFormSchema.pick({
-    firstName: true,
-    lastName: true,
+    name: true,
     email: true,
     phone: true
 });
-``;
+
 type PersonalData = z.infer<typeof PersonalDataSchema>;
 
 const PersonalDataStep = () => {
@@ -32,12 +31,12 @@ const PersonalDataStep = () => {
 
     return (
         <div>
-            <h2>Personal Data Step</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <FormField type="text" name="firstName" register={register} error={errors.firstName} />
-                <FormField type="text" name="lastName" register={register} error={errors.lastName} />
-                <FormField type="email" name="email" register={register} error={errors.email} />
-                <FormField type="tel" name="phone" register={register} error={errors.phone} />
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Let's start with your personal data</h2>
+            <span className="block w-full h-px bg-neutral-700 my-6"></span>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+                <FormField type="text" name="name" label="Name" register={register} error={errors.name} />
+                <FormField type="email" name="email" label="Email" register={register} error={errors.email} />
+                <FormField type="tel" name="phone" label="Phone" register={register} error={errors.phone} />
                 <StepNavigation />
             </form>
         </div>

@@ -7,7 +7,7 @@ import FormField from './FormField';
 import StepNavigation from './StepNavigation';
 
 const AddressSchema = BookTicketFormSchema.pick({
-    address: true,
+    street: true,
     city: true,
     zipCode: true
 });
@@ -31,9 +31,9 @@ const AddressStep = () => {
         <div>
             <h2>Address Step</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormField type="text" name="street" register={register} error={errors.street} />
-                <FormField type="text" name="city" register={register} error={errors.city} />
-                <FormField type="text" name="zipCode" register={register} error={errors.zipCode} />
+                <FormField type="text" name="street" label="Street" register={register} error={errors.street} />
+                <FormField type="text" name="city" label="City" register={register} error={errors.city} />
+                <FormField type="text" name="zipCode" label="Zip code" register={register} error={errors.zipCode} />
                 <StepNavigation />
             </form>
         </div>
