@@ -30,13 +30,11 @@ const Form = () => {
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
-        phone: '',
         street: '',
         city: '',
         zipCode: '',
         ticketType: '',
-        ticketQuantity: 0,
-        additionalInfo: ''
+        ticketQuantity: 0
     });
 
     const [currentStep, setCurrentStep] = useState(0);

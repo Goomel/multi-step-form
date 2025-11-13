@@ -7,27 +7,16 @@ export const BookTicketFormSchema = z.object({
         .min(3, 'Name must be at least 3 characters long')
         .max(20, 'Name must be at most 20 characters long'),
     email: z.email('Please enter a valid email'),
-    phone: z.string().min(9, 'Phone number must be at least 9 characters long'),
     street: z.string().min(1, 'Street is required'),
     city: z.string().min(1, 'City is required'),
     zipCode: z.string().min(1, 'Zip code is required'),
     ticketType: z.string().min(1, 'Ticket type is required'),
-    ticketQuantity: z.number().min(1, 'Ticket quantity must be at least 1'),
-    additionalInfo: z.string().optional()
+    ticketQuantity: z.number().min(1, 'Ticket quantity must be at least 1')
 });
 
 export type FormData = z.infer<typeof BookTicketFormSchema>;
 
-type NameFields =
-    | 'name'
-    | 'email'
-    | 'phone'
-    | 'street'
-    | 'city'
-    | 'zipCode'
-    | 'ticketType'
-    | 'ticketQuantity'
-    | 'additionalInfo';
+type NameFields = 'name' | 'email' | 'street' | 'city' | 'zipCode' | 'ticketType' | 'ticketQuantity';
 
 export type FormFieldProps = {
     type: string;

@@ -29,11 +29,34 @@ const AddressStep = () => {
     };
     return (
         <div>
-            <h2>Address Step</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <FormField type="text" name="street" label="Street" register={register} error={errors.street} />
-                <FormField type="text" name="city" label="City" register={register} error={errors.city} />
-                <FormField type="text" name="zipCode" label="Zip code" register={register} error={errors.zipCode} />
+            <p className="text-neutral-400 text-sm mb-1">Step 2/3</p>
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Enter your address details</h2>
+            <span className="block w-full h-px bg-neutral-700 my-6"></span>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
+                <FormField
+                    type="text"
+                    name="street"
+                    label="Street"
+                    register={register}
+                    error={errors.street}
+                    placeholder="123 Main St"
+                />
+                <FormField
+                    type="text"
+                    name="city"
+                    label="City"
+                    register={register}
+                    error={errors.city}
+                    placeholder="New York"
+                />
+                <FormField
+                    type="text"
+                    name="zipCode"
+                    label="Zip code"
+                    register={register}
+                    error={errors.zipCode}
+                    placeholder="10001"
+                />
                 <StepNavigation />
             </form>
         </div>

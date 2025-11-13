@@ -8,8 +8,7 @@ import FormField from './FormField';
 
 const ReservationDetailsSchema = BookTicketFormSchema.pick({
     ticketType: true,
-    ticketQuantity: true,
-    additionalInfo: true
+    ticketQuantity: true
 });
 
 type ReservationDetails = z.infer<typeof ReservationDetailsSchema>;
@@ -32,11 +31,12 @@ const ReservationDetailsStep = () => {
 
     return (
         <div>
-            <h2>Reservation Details Step</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <p className="text-neutral-400 text-sm mb-1">Step 3/3</p>
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Reservation details</h2>
+            <span className="block w-full h-px bg-neutral-700 my-6"></span>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
                 <FormField type="text" register={register} name="ticketType" error={errors.ticketType} />
                 <FormField type="text" register={register} name="ticketQuantity" error={errors.ticketQuantity} />
-                <FormField type="text" register={register} name="additionalInfo" error={errors.additionalInfo} />
                 <StepNavigation />
             </form>
         </div>
