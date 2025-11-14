@@ -5,23 +5,34 @@ import type { FormData } from '@/types';
 import PersonalDataStep from '@/components/forms/PersonalDataStep.tsx';
 import AddressStep from '@/components/forms/AddressStep.tsx';
 import ReservationDetailsStep from '@/components/forms/ReservationDetailsStep.tsx';
+import SummaryStep from '@/components/forms/SummaryStep.tsx';
 import StepLayout from '@/components/forms/StepLayout.tsx';
+import { FaUser, FaHouse, FaBook, FaEnvelope } from 'react-icons/fa6';
 
 const STEPS = [
     {
         label: 'Personal Data',
         path: '/personal-data',
-        component: <PersonalDataStep />
+        component: <PersonalDataStep />,
+        icon: <FaUser />
     },
     {
         label: 'Address',
         path: '/address',
-        component: <AddressStep />
+        component: <AddressStep />,
+        icon: <FaHouse />
     },
     {
         label: 'Reservation Details',
         path: '/reservation-details',
-        component: <ReservationDetailsStep />
+        component: <ReservationDetailsStep />,
+        icon: <FaBook />
+    },
+    {
+        label: 'Summary',
+        path: '/summary',
+        component: <SummaryStep />,
+        icon: <FaEnvelope />
     }
 ];
 
@@ -67,23 +78,25 @@ const Form = () => {
 
     return (
         <div className="container">
-            <FormContext.Provider value={contextValue}>
-                <StepLayout>
-                    <Routes>
-                        <Route index element={<Navigate to={STEPS[0].path} replace />} />
-                        {STEPS.map((step) => (
-                            <Route
-                                key={step.path}
-                                path={currentStep === 0 ? STEPS[0].path : step.path}
-                                element={step.component}
-                            />
-                        ))}
+            <div className="max-w-screen-lg mx-auto">
+                <FormContext.Provider value={contextValue}>
+                    <StepLayout>
+                        <Routes>
+                            <Route index element={<Navigate to={STEPS[0].path} replace />} />
+                            {STEPS.map((step) => (
+                                <Route
+                                    key={step.path}
+                                    path={currentStep === 0 ? STEPS[0].path : step.path}
+                                    element={step.component}
+                                />
+                            ))}
 
-                        {/* Default */}
-                        <Route path="*" element={<Navigate to={STEPS[0].path} replace />} />
-                    </Routes>
-                </StepLayout>
-            </FormContext.Provider>
+                            {/* Default */}
+                            <Route path="*" element={<Navigate to={STEPS[0].path} replace />} />
+                        </Routes>
+                    </StepLayout>
+                </FormContext.Provider>
+            </div>
         </div>
     );
 };

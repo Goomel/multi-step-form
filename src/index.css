@@ -24,6 +24,7 @@
 
 @layer base {
     body {
-        @apply font-sans bg-[var(--color-dark-bg)] text-gray-100;
+        @apply font-sans text-gray-100;
+        background-color: var(--color-dark-bg);
     }
 }
