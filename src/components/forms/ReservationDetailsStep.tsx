@@ -5,6 +5,7 @@ import { useFormContext } from '@/context/context';
 import { BookTicketFormSchema } from '@/types';
 import StepNavigation from './StepNavigation';
 import FormField from './FormField';
+import TicketTypeSelector from './TicketTypeSelector';
 
 const ReservationDetailsSchema = BookTicketFormSchema.pick({
     ticketType: true,
@@ -35,8 +36,15 @@ const ReservationDetailsStep = () => {
             <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Reservation details</h2>
             <span className="block w-full h-px bg-neutral-700 my-6"></span>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-                <FormField type="text" register={register} name="ticketType" error={errors.ticketType} />
-                <FormField type="text" register={register} name="ticketQuantity" error={errors.ticketQuantity} />
+                <TicketTypeSelector />
+                <FormField
+                    type="number"
+                    register={register}
+                    name="ticketQuantity"
+                    label="Number of tickets"
+                    placeholder="1"
+                    error={errors.ticketQuantity}
+                />
                 <StepNavigation />
             </form>
         </div>

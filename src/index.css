@@ -27,4 +27,14 @@
         @apply font-sans text-gray-100;
         background-color: var(--color-dark-bg);
     }
+
+    input[type='number'] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none; /* Chrome, Edge, Safari */
+        margin: 0;
+    }
 }

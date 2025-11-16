@@ -2,7 +2,7 @@ import type { FormFieldProps } from '@/types';
 
 const FormField = ({ type, placeholder, label, name, register, error }: FormFieldProps) => {
     return (
-        <label htmlFor={name} className="flex flex-col gap-1 text-xs lg:text-sm text-gray-200">
+        <label htmlFor={name} className="flex flex-col gap-2 text-xs lg:text-sm text-gray-200">
             {label}
             <input
                 id={name}
