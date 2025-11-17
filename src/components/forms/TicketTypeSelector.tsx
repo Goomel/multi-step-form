@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { UseFormRegister } from 'react-hook-form';
 
 type TicketType = 'standard' | 'premium' | 'vip';
 
@@ -10,16 +11,15 @@ const options: { value: TicketType; label: string }[] = [
 
 export default function TicketTypeSelector({
     value,
-    onChange
+    register
 }: {
     value?: TicketType;
-    onChange?: (value: TicketType) => void;
+    register: UseFormRegister<any>;
 }) {
     const [ticketType, setTicketType] = useState<TicketType>(value ?? 'standard');
 
     const handleSelect = (value: TicketType) => {
         setTicketType(value);
-        onChange?.(value);
     };
 
     return (
@@ -43,6 +43,7 @@ export default function TicketTypeSelector({
                     );
                 })}
             </div>
+            <input type="hidden" value={ticketType} {...register('ticketType')} />
         </div>
     );
 }

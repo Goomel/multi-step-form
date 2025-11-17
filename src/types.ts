@@ -11,7 +11,7 @@ export const BookTicketFormSchema = z.object({
     city: z.string().min(1, 'City is required'),
     zipCode: z.string().min(1, 'Zip code is required'),
     ticketType: z.string().min(1, 'Ticket type is required'),
-    ticketQuantity: z.number().min(1, 'Ticket quantity must be at least 1')
+    ticketQuantity: z.number({ error: 'Ticket quantity must be a number' }).min(1, 'Ticket quantity must be at least 1')
 });
 
 export type FormData = z.infer<typeof BookTicketFormSchema>;
