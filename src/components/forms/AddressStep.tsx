@@ -24,8 +24,7 @@ const AddressStep = () => {
     });
 
     const onSubmit = (data: Address) => {
-        console.log(data);
-        nextStep();
+        nextStep(data);
     };
     return (
         <div>

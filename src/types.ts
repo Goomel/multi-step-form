@@ -28,11 +28,11 @@ export type FormFieldProps = {
 };
 
 export type FormContextType = {
-    data: FormData;
+    formData: FormData;
     setFormData: (data: FormData) => void;
     steps: { label: string; path: string; component: React.ReactNode; icon: React.ReactNode }[];
     currentStep: number;
     setCurrentStep: (step: number) => void;
-    nextStep: () => void;
+    nextStep: (data?: Partial<FormData>) => void;
     prevStep: () => void;
 };

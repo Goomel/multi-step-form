@@ -24,8 +24,7 @@ const PersonalDataStep = () => {
     });
 
     const onSubmit = (data: PersonalData) => {
-        console.log(data);
-        nextStep();
+        nextStep(data);
     };
 
     return (
