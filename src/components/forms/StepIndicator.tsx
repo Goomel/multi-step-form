@@ -34,7 +34,7 @@ const StepIndicator = () => {
                         }}
                         transition={{ duration: 0.5, ease: 'easeInOut' }}
                     />
-                    {steps.map((step, index) => (
+                    {steps.map((_, index) => (
                         <div key={index} className="flex items-center justify-center z-1">
                             <div
                                 className={`size-4.5 rounded-full flex justify-center items-center bg-dark-bg border  ${index <= currentStep ? 'border-orange-400' : 'border-dark-bg-contrast'}`}

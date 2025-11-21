@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, Routes, Route, useNavigate } from 'react-router';
+import { Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { FormContext } from '@/context/context';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { FormData } from '@/types';
@@ -13,25 +13,25 @@ import { FaUser, FaHouse, FaBook, FaEnvelope } from 'react-icons/fa6';
 const STEPS = [
     {
         label: 'Personal Data',
-        path: '/personal-data',
+        path: 'personal-data',
         component: <PersonalDataStep />,
         icon: <FaUser />
     },
     {
         label: 'Address',
-        path: '/address',
+        path: 'address',
         component: <AddressStep />,
         icon: <FaHouse />
     },
     {
         label: 'Reservation Details',
-        path: '/reservation-details',
+        path: 'reservation-details',
         component: <ReservationDetailsStep />,
         icon: <FaBook />
     },
     {
         label: 'Summary',
-        path: '/summary',
+        path: 'summary',
         component: <SummaryStep />,
         icon: <FaEnvelope />
     }
@@ -49,7 +49,7 @@ const Form = () => {
             navigate(STEPS[nextStep].path);
 
             if (data) {
-                setFormData({ ...formData, ...data });
+                setFormData((prev) => ({ ...prev, ...data }));
             }
         }
     };
@@ -78,12 +78,21 @@ const Form = () => {
                 <FormContext.Provider value={contextValue}>
                     <StepLayout>
                         <Routes>
+                            {/* Redirect from base "/" */}
                             <Route index element={<Navigate to={STEPS[0].path} replace />} />
-                            {STEPS.map((step) => (
+
+                            {/* Proper route mapping */}
+                            {STEPS.map((step, index) => (
                                 <Route
                                     key={step.path}
-                                    path={currentStep === 0 ? STEPS[0].path : step.path}
-                                    element={step.component}
+                                    path={step.path}
+                                    element={
+                                        index <= currentStep ? (
+                                            step.component
+                                        ) : (
+                                            <Navigate to={`/${STEPS[currentStep].path}`} replace />
+                                        )
+                                    }
                                 />
                             ))}
 
