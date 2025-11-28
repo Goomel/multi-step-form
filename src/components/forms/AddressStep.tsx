@@ -14,13 +14,14 @@ const AddressSchema = BookTicketFormSchema.pick({
 type Address = z.infer<typeof AddressSchema>;
 
 const AddressStep = () => {
-    const { nextStep } = useFormContext();
+    const { nextStep, formData } = useFormContext();
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm<Address>({
-        resolver: zodResolver(AddressSchema)
+        resolver: zodResolver(AddressSchema),
+        defaultValues: formData.formData
     });
 
     const onSubmit = (data: Address) => {

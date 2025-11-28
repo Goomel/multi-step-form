@@ -15,15 +15,15 @@ const ReservationDetailsSchema = BookTicketFormSchema.pick({
 type ReservationDetails = z.infer<typeof ReservationDetailsSchema>;
 
 const ReservationDetailsStep = () => {
+    const { nextStep, formData } = useFormContext();
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm<ReservationDetails>({
-        resolver: zodResolver(ReservationDetailsSchema)
+        resolver: zodResolver(ReservationDetailsSchema),
+        defaultValues: formData.formData
     });
-
-    const { nextStep } = useFormContext();
 
     const onSubmit = (data: ReservationDetails) => {
         console.log(data);

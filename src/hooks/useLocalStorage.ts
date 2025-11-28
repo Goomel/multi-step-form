@@ -1,28 +1,23 @@
 import { useEffect, useState } from 'react';
-import type { FormData } from '@/types';
 
-export const useLocalStorage = () => {
-    const defaultValue: FormData = {
-        name: '',
-        email: '',
-        street: '',
-        city: '',
-        zipCode: '',
-        ticketType: '',
-        ticketQuantity: 0
-    };
-    const [value, setValue] = useState<FormData>(defaultValue);
+type UseLocalStorageType<T> = {
+    key: string;
+    initialValue: T;
+};
 
-    useEffect(() => {
-        const storedValue = localStorage.getItem('formData');
-        if (storedValue) {
-            setValue(JSON.parse(storedValue));
+export const useLocalStorage = <T>({ key, initialValue }: UseLocalStorageType<T>) => {
+    const [value, setValue] = useState(() => {
+        try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch {
+            return initialValue;
         }
-    }, []);
+    });
 
     useEffect(() => {
-        localStorage.setItem('formData', JSON.stringify(value));
+        localStorage.setItem(key, JSON.stringify(value));
     }, [value]);
 
-    return [value, setValue] as [FormData, React.Dispatch<React.SetStateAction<FormData>>];
+    return [value, setValue] as [T, React.Dispatch<React.SetStateAction<T>>];
 };

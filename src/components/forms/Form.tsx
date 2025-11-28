@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Navigate, Routes, Route, useNavigate } from 'react-router-dom';
 import { FormContext } from '@/context/context';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -37,19 +36,32 @@ const STEPS = [
     }
 ];
 
+const defaultFormData = {
+    name: '',
+    email: '',
+    street: '',
+    city: '',
+    zipCode: '',
+    ticketType: '',
+    ticketQuantity: 0
+};
+
 const Form = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useLocalStorage();
-    const [currentStep, setCurrentStep] = useState(0);
+    const [formData, setFormData] = useLocalStorage<{ step: number; formData: FormData }>({
+        key: 'ticket-form-state',
+        initialValue: { step: 0, formData: defaultFormData }
+    });
+
+    const currentStep = formData.step;
 
     const nextStep = (data?: Partial<FormData>) => {
         if (currentStep < STEPS.length - 1) {
             const nextStep = currentStep + 1;
-            setCurrentStep(nextStep);
             navigate(STEPS[nextStep].path);
 
             if (data) {
-                setFormData((prev) => ({ ...prev, ...data }));
+                setFormData((prev) => ({ ...prev, step: nextStep, formData: { ...prev.formData, ...data } }));
             }
         }
     };
@@ -57,8 +69,9 @@ const Form = () => {
     const prevStep = () => {
         if (currentStep > 0) {
             const prevStep = currentStep - 1;
-            setCurrentStep(prevStep);
             navigate(STEPS[prevStep].path);
+
+            setFormData((prev) => ({ ...prev, step: prevStep }));
         }
     };
 
@@ -67,7 +80,6 @@ const Form = () => {
         setFormData,
         steps: STEPS,
         currentStep,
-        setCurrentStep,
         nextStep,
         prevStep
     };
@@ -79,7 +91,7 @@ const Form = () => {
                     <StepLayout>
                         <Routes>
                             {/* Redirect from base "/" */}
-                            <Route index element={<Navigate to={STEPS[0].path} replace />} />
+                            <Route index element={<Navigate to={STEPS[currentStep].path} replace />} />
 
                             {/* Proper route mapping */}
                             {STEPS.map((step, index) => (

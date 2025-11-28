@@ -14,13 +14,14 @@ const PersonalDataSchema = BookTicketFormSchema.pick({
 type PersonalData = z.infer<typeof PersonalDataSchema>;
 
 const PersonalDataStep = () => {
-    const { nextStep } = useFormContext();
+    const { nextStep, formData } = useFormContext();
     const {
         register,
         handleSubmit,
         formState: { errors }
     } = useForm<PersonalData>({
-        resolver: zodResolver(PersonalDataSchema)
+        resolver: zodResolver(PersonalDataSchema),
+        defaultValues: formData.formData
     });
 
     const onSubmit = (data: PersonalData) => {
