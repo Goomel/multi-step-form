@@ -1,4 +1,5 @@
 import { Navigate, Routes, Route, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { FormContext } from '@/context/context';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { FormData } from '@/types';
@@ -43,12 +44,12 @@ const defaultFormData = {
     city: '',
     zipCode: '',
     ticketType: '',
-    ticketQuantity: 0
+    ticketQuantity: 1
 };
 
 const Form = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useLocalStorage<{ step: number; formData: FormData }>({
+    const [formData, setFormData, clear] = useLocalStorage<{ step: number; formData: FormData }>({
         key: 'ticket-form-state',
         initialValue: { step: 0, formData: defaultFormData }
     });
@@ -56,8 +57,9 @@ const Form = () => {
     const currentStep = formData.step;
 
     const nextStep = (data?: Partial<FormData>) => {
-        if (currentStep < STEPS.length - 1) {
+        if (currentStep <= STEPS.length) {
             const nextStep = currentStep + 1;
+            console.log(nextStep);
             navigate(STEPS[nextStep].path);
 
             if (data) {
@@ -74,6 +76,12 @@ const Form = () => {
             setFormData((prev) => ({ ...prev, step: prevStep }));
         }
     };
+
+    useEffect(() => {
+        if (currentStep === STEPS.length - 1) {
+            clear(false);
+        }
+    }, [currentStep, clear]);
 
     const contextValue = {
         formData,

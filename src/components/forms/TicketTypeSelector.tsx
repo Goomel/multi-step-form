@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import type { UseFormRegister } from 'react-hook-form';
+import { useState, useEffect } from 'react';
+import type { UseFormSetValue } from 'react-hook-form';
 
 type TicketType = 'standard' | 'premium' | 'vip';
 
@@ -11,12 +11,16 @@ const options: { value: TicketType; label: string }[] = [
 
 export default function TicketTypeSelector({
     value,
-    register
+    setValue
 }: {
     value?: TicketType;
-    register: UseFormRegister<any>;
+    setValue: UseFormSetValue<any>;
 }) {
     const [ticketType, setTicketType] = useState<TicketType>(value ?? 'standard');
+
+    useEffect(() => {
+        setValue('ticketType', ticketType, { shouldValidate: true });
+    }, [ticketType, setValue]);
 
     const handleSelect = (value: TicketType) => {
         setTicketType(value);
@@ -36,6 +40,7 @@ export default function TicketTypeSelector({
                             role="radio"
                             aria-checked={isActive}
                             tabIndex={0}
+                            type="button"
                             className={`flex flex-col items-center justify-center px-5 py-3 rounded-xl border transition-all cursor-pointer select-none hover:bg-dark-bg-contrast/10 focus:!outline-none focus:bg-dark-bg-contrast/10 ${isActive ? 'border-orange-400 bg-dark-bg-contrast/10' : 'border-dark-bg-contrast'}`}
                         >
                             <span className="font-medium">{option.label}</span>
@@ -43,7 +48,6 @@ export default function TicketTypeSelector({
                     );
                 })}
             </div>
-            <input type="hidden" value={ticketType} {...register('ticketType')} />
         </div>
     );
 }

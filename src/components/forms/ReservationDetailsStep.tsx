@@ -19,6 +19,7 @@ const ReservationDetailsStep = () => {
     const {
         register,
         handleSubmit,
+        setValue,
         formState: { errors }
     } = useForm<ReservationDetails>({
         resolver: zodResolver(ReservationDetailsSchema),
@@ -26,8 +27,7 @@ const ReservationDetailsStep = () => {
     });
 
     const onSubmit = (data: ReservationDetails) => {
-        console.log(data);
-        nextStep();
+        nextStep(data);
     };
 
     return (
@@ -36,7 +36,7 @@ const ReservationDetailsStep = () => {
             <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Reservation details</h2>
             <span className="block w-full h-px bg-neutral-700 my-6"></span>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-                <TicketTypeSelector register={register} />
+                <TicketTypeSelector setValue={setValue} />
                 <FormField
                     type="number"
                     register={register}

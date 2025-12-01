@@ -15,9 +15,16 @@ export const useLocalStorage = <T>({ key, initialValue }: UseLocalStorageType<T>
         }
     });
 
+    const clear = (resetState = true) => {
+        localStorage.removeItem(key);
+        if (resetState) {
+            setValue(initialValue);
+        }
+    };
+
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(value));
     }, [value]);
 
-    return [value, setValue] as [T, React.Dispatch<React.SetStateAction<T>>];
+    return [value, setValue, clear] as [T, React.Dispatch<React.SetStateAction<T>>, (resetState?: boolean) => void];
 };
