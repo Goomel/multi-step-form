@@ -94,7 +94,7 @@ const Form = () => {
 
     return (
         <div className="container">
-            <div className="max-w-screen-lg mx-auto">
+            <div className="max-w-screen-lg min-w-[260px] mx-auto">
                 <FormContext.Provider value={contextValue}>
                     <StepLayout>
                         <Routes>

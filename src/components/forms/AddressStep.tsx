@@ -31,7 +31,7 @@ const AddressStep = () => {
         <div>
             <p className="text-neutral-400 text-sm mb-1">Step 2/3</p>
             <h2 className="text-lg sm:text-xl lg:text-2xl font-bold">Enter your address details</h2>
-            <span className="block w-full h-px bg-neutral-700 my-6"></span>
+            <span className="block w-full h-px bg-neutral-700 my-4 lg:my-6"></span>
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
                 <FormField
                     type="text"

@@ -6,7 +6,8 @@ const StepIndicator = () => {
     const { currentStep, steps } = useFormContext();
 
     return (
-        <div className="relative">
+        <>
+        <div className="relative hidden lg:block">
             <div className="flex gap-14">
                 <div className="relative flex flex-col items-end gap-14 my-10 h-fit">
                     <div className="absolute w-px h-full right-6 translate-x-1/2 bg-dark-bg-contrast"></div>
@@ -49,6 +50,7 @@ const StepIndicator = () => {
             </div>
             <div className="absolute w-px h-full right-[9px] top-0 translate-x-1/2 bg-dark-bg-contrast"></div>
         </div>
+        </>
     );
 };
 

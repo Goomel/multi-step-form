@@ -29,7 +29,7 @@ export default function TicketTypeSelector({
     return (
         <div className="flex flex-col gap-2">
             <p className="text-xs lg:text-sm text-gray-200">Ticket type</p>
-            <div className="flex gap-3" role="radiogroup">
+            <div className="flex flex-wrap gap-3" role="radiogroup">
                 {options.map((option) => {
                     const isActive = option.value === ticketType;
 
@@ -41,9 +41,9 @@ export default function TicketTypeSelector({
                             aria-checked={isActive}
                             tabIndex={0}
                             type="button"
-                            className={`flex flex-col items-center justify-center px-5 py-3 rounded-xl border transition-all cursor-pointer select-none hover:bg-dark-bg-contrast/10 focus:!outline-none focus:bg-dark-bg-contrast/10 ${isActive ? 'border-orange-400 bg-dark-bg-contrast/10' : 'border-dark-bg-contrast'}`}
+                            className={`grow flex flex-col items-center justify-center px-5 py-3 rounded-xl border transition-all cursor-pointer select-none hover:bg-dark-bg-contrast/10 focus:!outline-none focus:bg-dark-bg-contrast/10 ${isActive ? 'border-orange-400 bg-dark-bg-contrast/10' : 'border-dark-bg-contrast'}`}
                         >
-                            <span className="font-medium">{option.label}</span>
+                            <span className="text-sm lg:text-base font-medium">{option.label}</span>
                         </button>
                     );
                 })}
